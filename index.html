@@ -627,9 +627,9 @@
   #contact {
     background: var(--ink);
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.2fr;
     gap: 6rem;
-    align-items: center;
+    align-items: start;
   }
 
   #contact .section-title { color: var(--cream); }
@@ -642,41 +642,148 @@
     font-weight: 300;
   }
 
-  .contact-links {
+  .contact-social {
+    margin-top: 2.5rem;
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 1rem;
   }
 
-  .contact-link {
+  .contact-social-link {
     display: flex;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1rem;
     text-decoration: none;
-    padding: 1.2rem 1.5rem;
-    border: 1px solid rgba(255,255,255,0.1);
+    padding: 1rem 1.2rem;
+    border: 1px solid rgba(255,255,255,0.08);
     transition: border-color 0.2s, background 0.2s;
   }
 
-  .contact-link:hover {
+  .contact-social-link:hover {
     border-color: var(--gold);
     background: rgba(200,153,58,0.06);
   }
 
-  .contact-link-icon {
-    width: 36px;
-    height: 36px;
-    background: rgba(200,153,58,0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .contact-social-icon {
+    width: 32px; height: 32px;
+    background: rgba(200,153,58,0.12);
+    display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
 
-  .contact-link-icon svg { width: 16px; height: 16px; color: var(--gold); }
+  .contact-social-icon svg { width: 15px; height: 15px; color: var(--gold); }
 
-  .contact-link-text { flex: 1; }
+  .contact-social-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.35);
+    margin-bottom: 0.2rem;
+  }
 
+  .contact-social-value {
+    font-size: 0.88rem;
+    color: var(--cream);
+  }
+
+  /* CONTACT FORM */
+  .contact-form-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-field label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    padding: 0.85rem 1rem;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    resize: none;
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+
+  .form-field select option { background: #1a1a1a; color: var(--cream); }
+
+  .form-field input::placeholder,
+  .form-field textarea::placeholder { color: rgba(245,240,232,0.2); }
+
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus {
+    border-color: var(--gold);
+    background: rgba(200,153,58,0.04);
+  }
+
+  .form-submit {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-submit {
+    padding: 1rem 2.2rem;
+    background: var(--gold);
+    color: var(--ink);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(200,153,58,0.35);
+  }
+
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .form-status {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    min-height: 1.2em;
+  }
+
+  .form-status.success { color: #6fcf97; }
+  .form-status.error   { color: #eb5757; }
+
+  /* hide old contact-link stuff that no longer exists */
   .contact-link-label {
     font-family: 'Space Mono', monospace;
     font-size: 0.58rem;
@@ -1101,56 +1208,81 @@
     <div class="section-label">05 — Contact</div>
     <h2 class="section-title">Let's Build<br><em>Something</em></h2>
     <p class="contact-sub">Open to senior product marketing, growth, and GTM leadership roles. Based in Pune, India. Available for remote, hybrid, and relocation opportunities.</p>
+
+    <div class="contact-social">
+      <a href="https://www.linkedin.com/in/anandtambey" target="_blank" class="contact-social-link">
+        <div class="contact-social-icon">
+          <svg fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="contact-social-label">LinkedIn</div>
+          <div class="contact-social-value">linkedin.com/in/anandtambey</div>
+        </div>
+      </a>
+
+      <a href="https://github.com/AnandTambey" target="_blank" class="contact-social-link">
+        <div class="contact-social-icon">
+          <svg fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="contact-social-label">GitHub</div>
+          <div class="contact-social-value">github.com/AnandTambey</div>
+        </div>
+      </a>
+    </div>
   </div>
 
-  <div class="contact-links reveal">
-    <a href="mailto:tambey.anand@gmail.com" class="contact-link">
-      <div class="contact-link-icon">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
-        </svg>
-      </div>
-      <div class="contact-link-text">
-        <div class="contact-link-label">Email</div>
-        <div class="contact-link-value">tambey.anand@gmail.com</div>
-      </div>
-    </a>
+  <!-- CONTACT FORM — powered by Web3Forms (free, no backend needed) -->
+  <div class="contact-form-wrap reveal">
 
-    <a href="tel:+919890899967" class="contact-link">
-      <div class="contact-link-icon">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
-        </svg>
+    <div class="form-row">
+      <div class="form-field">
+        <label for="cf-name">Your Name</label>
+        <input type="text" id="cf-name" placeholder="Jane Smith" required>
       </div>
-      <div class="contact-link-text">
-        <div class="contact-link-label">Phone</div>
-        <div class="contact-link-value">+91 98908 99967</div>
+      <div class="form-field">
+        <label for="cf-email">Your Email</label>
+        <input type="email" id="cf-email" placeholder="jane@company.com" required>
       </div>
-    </a>
+    </div>
 
-    <a href="https://www.linkedin.com/in/anandtambey" target="_blank" class="contact-link">
-      <div class="contact-link-icon">
-        <svg fill="currentColor" viewBox="0 0 24 24">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-        </svg>
+    <div class="form-row">
+      <div class="form-field">
+        <label for="cf-company">Company</label>
+        <input type="text" id="cf-company" placeholder="Acme Corp">
       </div>
-      <div class="contact-link-text">
-        <div class="contact-link-label">LinkedIn</div>
-        <div class="contact-link-value">linkedin.com/in/anandtambey</div>
+      <div class="form-field">
+        <label for="cf-subject">Reason for Reaching Out</label>
+        <select id="cf-subject">
+          <option value="" disabled selected>Select one</option>
+          <option value="Job Opportunity">Job Opportunity</option>
+          <option value="Consulting Enquiry">Consulting Enquiry</option>
+          <option value="Collaboration">Collaboration</option>
+          <option value="Speaking / Advisory">Speaking / Advisory</option>
+          <option value="Other">Other</option>
+        </select>
       </div>
-    </a>
+    </div>
 
-    <a href="https://github.com/AnandTambey" target="_blank" class="contact-link">
-      <div class="contact-link-icon">
-        <svg fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+    <div class="form-field">
+      <label for="cf-message">Message</label>
+      <textarea id="cf-message" rows="5" placeholder="Tell me about the opportunity or what you have in mind..."></textarea>
+    </div>
+
+    <div class="form-submit">
+      <button class="btn-submit" id="cf-submit" onclick="submitForm(event)">
+        <span id="cf-btn-text">Send Message</span>
+        <svg id="cf-btn-icon" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/>
         </svg>
-      </div>
-      <div class="contact-link-text">
-        <div class="contact-link-label">GitHub</div>
-        <div class="contact-link-value">github.com/AnandTambey</div>
-      </div>
-    </a>
+      </button>
+      <div class="form-status" id="cf-status"></div>
+    </div>
+
   </div>
 </section>
 
@@ -1192,6 +1324,68 @@
       a.style.opacity = a.getAttribute('href') === '#' + current ? '1' : '0.6';
     });
   }, { passive: true });
+
+  // ── CONTACT FORM via Web3Forms ──
+  // Web3Forms is a free service — sign up at web3forms.com with your email address,
+  // then paste the access key it gives you below (replace YOUR_ACCESS_KEY_HERE).
+  // No backend or server needed — works perfectly on GitHub Pages.
+  const WEB3FORMS_KEY = '7c1ff1b1-9c70-4a60-8d0e-57305c1a4cc1';
+
+  async function submitForm(e) {
+    e.preventDefault();
+    const btn    = document.getElementById('cf-submit');
+    const status = document.getElementById('cf-status');
+    const btnTxt = document.getElementById('cf-btn-text');
+
+    const name    = document.getElementById('cf-name').value.trim();
+    const email   = document.getElementById('cf-email').value.trim();
+    const company = document.getElementById('cf-company').value.trim();
+    const subject = document.getElementById('cf-subject').value;
+    const message = document.getElementById('cf-message').value.trim();
+
+    if (!name || !email || !message) {
+      status.textContent = 'Please fill in your name, email, and message.';
+      status.className = 'form-status error';
+      return;
+    }
+
+    btn.disabled = true;
+    btnTxt.textContent = 'Sending...';
+    status.textContent = '';
+    status.className = 'form-status';
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `Portfolio Contact: ${subject || 'New Message'} from ${name}`,
+          from_name: name,
+          email,
+          company: company || 'Not provided',
+          reason: subject || 'Not specified',
+          message,
+          botcheck: ''
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        status.textContent = 'Message sent! I will get back to you soon.';
+        status.className = 'form-status success';
+        ['cf-name','cf-email','cf-company','cf-message'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('cf-subject').selectedIndex = 0;
+        btnTxt.textContent = 'Sent';
+      } else {
+        throw new Error(data.message || 'Submission failed');
+      }
+    } catch (err) {
+      status.textContent = 'Something went wrong. Please try again or reach out via LinkedIn.';
+      status.className = 'form-status error';
+      btnTxt.textContent = 'Send Message';
+      btn.disabled = false;
+    }
+  }
 
   // Count-up animation for impact strip
   function countUp(el, target, suffix = '') {
