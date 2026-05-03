@@ -1,7 +1,1227 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anand Tambey — Product Marketing &amp; Growth Leader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --cream: #f5f0e8;
+    --warm: #ede7d9;
+    --gold: #c8993a;
+    --gold-lt: #e8c96a;
+    --rust: #b84c2b;
+    --teal: #1a6b6b;
+    --mist: #d6cfc2;
+    --white: #faf8f4;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 900;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 4rem;
+    mix-blend-mode: multiply;
+  }
+
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.7;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 6rem 4rem 5rem;
+    position: relative;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    top: 0; right: -1px;
+    width: 2px;
+    height: 100%;
+    background: var(--gold);
+  }
+
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    line-height: 1;
+    color: var(--cream);
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--gold-lt);
+  }
+
+  .hero-tagline {
+    margin-top: 2.5rem;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: rgba(245,240,232,0.6);
+    font-weight: 300;
+    max-width: 36ch;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-cta-group {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.8rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .btn:hover { transform: translateY(-2px); }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .btn-gold:hover { box-shadow: 0 8px 24px rgba(200,153,58,0.4); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid rgba(245,240,232,0.3);
+  }
+
+  .btn-outline:hover { border-color: var(--cream); }
+
+  .hero-right {
+    background: var(--warm);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 5rem;
+    position: relative;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem 3rem;
+  }
+
+  .stat-item {
+    opacity: 0;
+    animation: fadeUp 0.7s forwards;
+  }
+
+  .stat-item:nth-child(1) { animation-delay: 0.5s; }
+  .stat-item:nth-child(2) { animation-delay: 0.65s; }
+  .stat-item:nth-child(3) { animation-delay: 0.8s; }
+  .stat-item:nth-child(4) { animation-delay: 0.95s; }
+
+  .stat-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.5rem;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+  }
+
+  .stat-number span {
+    color: var(--gold);
+  }
+
+  .stat-label {
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
+    color: rgba(13,13,13,0.55);
+    line-height: 1.4;
+    font-weight: 400;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 4rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(13,13,13,0.4);
+    writing-mode: vertical-rl;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .hero-scroll::before {
+    content: '';
+    width: 1px;
+    height: 50px;
+    background: var(--gold);
+    animation: lineGrow 1.5s 1.2s both;
+  }
+
+  @keyframes lineGrow {
+    from { height: 0; }
+    to { height: 50px; }
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 7rem 4rem; }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .section-title em { font-style: italic; color: var(--teal); }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--white);
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .about-left { position: sticky; top: 8rem; }
+
+  .about-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(13,13,13,0.75);
+    font-weight: 300;
+  }
+
+  .about-body p + p { margin-top: 1.4rem; }
+
+  .about-highlight {
+    margin-top: 3rem;
+    padding: 1.8rem 2rem;
+    background: var(--ink);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-highlight::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--gold);
+  }
+
+  .about-highlight p {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--cream);
+  }
+
+  /* ── SKILLS GRID ── */
+  #skills {
+    background: var(--ink);
+    padding: 7rem 4rem;
+  }
+
+  #skills .section-title { color: var(--cream); }
+
+  .skills-grid {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .skill-card {
+    background: var(--ink);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .skill-card:hover { background: #1a1a1a; }
+
+  .skill-card::before {
+    content: attr(data-num);
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+  }
+
+  .skill-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 1.5rem;
+    color: var(--gold);
+  }
+
+  .skill-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    color: var(--cream);
+    margin-bottom: 0.8rem;
+  }
+
+  .skill-desc {
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: rgba(245,240,232,0.45);
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience {
+    background: var(--cream);
+  }
+
+  .exp-grid {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 4rem;
+    padding: 3rem 0;
+    border-top: 1px solid var(--mist);
+    transition: background 0.2s;
+    cursor: default;
+  }
+
+  .exp-item:last-child { border-bottom: 1px solid var(--mist); }
+
+  .exp-meta { padding-top: 0.2rem; }
+
+  .exp-period {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .exp-company {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .exp-role {
+    margin-top: 0.4rem;
+    font-size: 0.82rem;
+    color: rgba(13,13,13,0.5);
+    font-weight: 400;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding-top: 0.1rem;
+  }
+
+  .exp-bullets li {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: rgba(13,13,13,0.7);
+    padding-left: 1.4rem;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  .exp-tag {
+    display: inline-block;
+    margin-top: 1.2rem;
+    padding: 0.3rem 0.7rem;
+    background: var(--warm);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+
+  /* ── PORTFOLIO / PROJECTS ── */
+  #portfolio {
+    background: var(--warm);
+  }
+
+  .portfolio-intro {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: rgba(13,13,13,0.55);
+    max-width: 52ch;
+    line-height: 1.7;
+  }
+
+  .projects-grid {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--white);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(13,13,13,0.1);
+  }
+
+  .project-card.featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    background: var(--ink);
+  }
+
+  .project-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .project-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .project-card.featured .project-title,
+  .project-card.featured .project-desc,
+  .project-card.featured .project-metric-label { color: var(--cream); }
+
+  .project-card.featured .project-desc { color: rgba(245,240,232,0.6); }
+
+  .project-desc {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: rgba(13,13,13,0.65);
+  }
+
+  .project-metrics {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .project-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .project-metric-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .project-metric-label {
+    font-size: 0.72rem;
+    color: rgba(13,13,13,0.5);
+    line-height: 1.3;
+  }
+
+  .project-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .outcome-item {
+    padding: 1.2rem 1.5rem;
+    background: rgba(255,255,255,0.06);
+    border-left: 2px solid var(--gold);
+  }
+
+  .outcome-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .outcome-value {
+    font-size: 0.88rem;
+    color: rgba(245,240,232,0.75);
+    line-height: 1.5;
+  }
+
+  /* ── IMPACT STRIP ── */
+  .impact-strip {
+    background: var(--gold);
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .impact-stat {
+    text-align: center;
+  }
+
+  .impact-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.8rem;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .impact-label {
+    font-size: 0.75rem;
+    color: rgba(13,13,13,0.65);
+    margin-top: 0.3rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--ink);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  #contact .section-title { color: var(--cream); }
+
+  .contact-sub {
+    margin-top: 1.2rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.5);
+    font-weight: 300;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    text-decoration: none;
+    padding: 1.2rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .contact-link:hover {
+    border-color: var(--gold);
+    background: rgba(200,153,58,0.06);
+  }
+
+  .contact-link-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(200,153,58,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contact-link-icon svg { width: 16px; height: 16px; color: var(--gold); }
+
+  .contact-link-text { flex: 1; }
+
+  .contact-link-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    margin-bottom: 0.25rem;
+  }
+
+  .contact-link-value {
+    font-size: 0.9rem;
+    color: var(--cream);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060606;
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  footer p {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    color: rgba(245,240,232,0.25);
+    text-transform: uppercase;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { min-height: 60vh; padding: 8rem 2rem 3rem; }
+    .hero-right { padding: 3rem 2rem; }
+    #about, #contact { grid-template-columns: 1fr; }
+    .about-left { position: static; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 1rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-template-columns: 1fr; }
+    section { padding: 5rem 2rem; }
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { gap: 1.5rem; }
+    .impact-strip { justify-content: center; }
+  }
+
+  @media (max-width: 600px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Anand Tambey</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Product Marketing &amp; Growth Leader</div>
+    <h1 class="hero-name">Anand<br><em>Tambey</em></h1>
+    <p class="hero-tagline">
+      Turning market signals into revenue-driving strategy. 24+ years building go-to-market engines, growth loops, and UX transformations that scale.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#portfolio" class="btn btn-gold">View Portfolio</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">25<span>X</span></div>
+        <div class="stat-label">ARR growth delivered at AutomationEdge</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">10<span>X</span></div>
+        <div class="stat-label">Pipeline growth via PLG and SEO experiments</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">24<span>+</span></div>
+        <div class="stat-label">Years across product, growth &amp; marketing</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4<span></span></div>
+        <div class="stat-label">Mini-products launched end-to-end</div>
+      </div>
+    </div>
+    <div class="hero-scroll">Scroll<span></span></div>
+  </div>
+</section>
+
+<!-- IMPACT STRIP -->
+<div class="impact-strip">
+  <div class="impact-stat">
+    <div class="impact-num">400</div>
+    <div class="impact-label">Demo requests per year (from 50)</div>
+  </div>
+  <div class="impact-stat">
+    <div class="impact-num">12%</div>
+    <div class="impact-label">LinkedIn CTR (vs 0.5% avg)</div>
+  </div>
+  <div class="impact-stat">
+    <div class="impact-num">100%</div>
+    <div class="impact-label">Customer retention rate</div>
+  </div>
+  <div class="impact-stat">
+    <div class="impact-num">75%</div>
+    <div class="impact-label">Onboarding drop-off reduction</div>
+  </div>
+  <div class="impact-stat">
+    <div class="impact-num">1</div>
+    <div class="impact-label">Patent holder — automation framework</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left reveal">
+    <div class="section-label">01 — About</div>
+    <h2 class="section-title">Insight to<br><em>Action</em></h2>
+  </div>
+  <div class="about-right reveal">
+    <div class="about-body">
+      <p>I'm a product marketing and growth leader with 24+ years of experience turning complex market data into clear, revenue-driving decisions. My work sits at the intersection of strategy, data, and commercialization.</p>
+      <p>At AutomationEdge, I grew demo requests 10X, delivered 25X ARR growth, and rebuilt the product trial experience from 19 steps to one — reducing drop-offs by over 20 points. Before that, I spent years as a consultant accelerating product-market fit for B2B SaaS companies across India and beyond.</p>
+      <p>I've led growth across healthcare, BFSI, telecom, and enterprise SaaS — with deep fluency in competitive intelligence, pricing strategy, GTM execution, and AI-powered research automation. I build systems that scale: growth loops, enablement libraries, and experimentation cultures that generate compounding returns.</p>
+    </div>
+    <div class="about-highlight">
+      <p>"Research without a recommended action is incomplete. I close the loop between intelligence and business impact — every time."</p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label" style="color: rgba(200,153,58,0.8)">02 — Expertise</div>
+  <h2 class="section-title">Core <em style="color:var(--gold-lt)">Competencies</em></h2>
+
+  <div class="skills-grid">
+    <div class="skill-card reveal" data-num="01">
+      <svg class="skill-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
+      </svg>
+      <div class="skill-name">GTM Strategy</div>
+      <div class="skill-desc">End-to-end go-to-market planning, portfolio positioning, budget allocation, ROI frameworks, and launch execution across B2B SaaS and enterprise segments.</div>
+    </div>
+
+    <div class="skill-card reveal" data-num="02">
+      <svg class="skill-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+      </svg>
+      <div class="skill-name">Market Intelligence</div>
+      <div class="skill-desc">Competitive research, win/loss analysis, customer interview programs, analyst synthesis, and AI-powered monitoring pipelines that deliver ground-truth insights.</div>
+    </div>
+
+    <div class="skill-card reveal" data-num="03">
+      <svg class="skill-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
+      </svg>
+      <div class="skill-name">Product Growth</div>
+      <div class="skill-desc">AARRR funnel ownership, product-led growth loop engineering, A/B and multivariate experimentation, onboarding optimization, and LTV improvement programs.</div>
+    </div>
+
+    <div class="skill-card reveal" data-num="04">
+      <svg class="skill-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+      </svg>
+      <div class="skill-name">UX and Journey Design</div>
+      <div class="skill-desc">Customer journey mapping, persona development, onboarding redesign, frictionless UX transformation, and Design Thinking facilitation at scale.</div>
+    </div>
+
+    <div class="skill-card reveal" data-num="05">
+      <svg class="skill-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"/>
+      </svg>
+      <div class="skill-name">Pricing Strategy</div>
+      <div class="skill-desc">Pricing model development (value-based, usage-based, tiered), scenario modeling, willingness-to-pay research, and ACV/NRR optimization for B2B SaaS.</div>
+    </div>
+
+    <div class="skill-card reveal" data-num="06">
+      <svg class="skill-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/>
+      </svg>
+      <div class="skill-name">AI and Automation</div>
+      <div class="skill-desc">LLM-powered research workflows, GPT agent development, AI-driven reporting pipelines, and generative AI application to marketing and product operations.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">03 — Career</div>
+  <h2 class="section-title">Work <em>Experience</em></h2>
+
+  <div class="exp-grid">
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-period">Dec 2021 — Present</div>
+        <div class="exp-company">AutomationEdge</div>
+        <div class="exp-role">Sr. Manager, Product Growth and GTM Strategy</div>
+        <span class="exp-tag">B2B SaaS</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Drove 25X ARR growth via strategic customer journey mapping and upsell programs, maintaining 100% customer retention.</li>
+        <li>Grew demo requests from 50 to 400 annually — a 3X to 10X increase — through SEO, growth loops, and CRO experimentation.</li>
+        <li>Rebuilt product onboarding from 19 steps to 1, reducing trial drop-offs from 97% to 75%.</li>
+        <li>Delivered LinkedIn Ads with CTRs of 1.5% to 12% against a 0.5% industry average using persona-driven creative testing.</li>
+        <li>Built competitive intelligence program and AI-powered research workflows, accelerating insight delivery by 60%.</li>
+        <li>Developed full sales enablement library including battlecards, solution briefs, pitch decks, and training programs.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-period">Mar 2020 — Nov 2021</div>
+        <div class="exp-company">Possible Consulting</div>
+        <div class="exp-role">Growth Strategy Consultant, B2B SaaS GTM</div>
+        <span class="exp-tag">Consulting</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Accelerated product-market fit, user growth, and revenue by 3X across multiple SaaS client engagements.</li>
+        <li>Built GTM frameworks, persona libraries, and competitive positioning matrices delivering 20% ARR growth.</li>
+        <li>Led primary research programs including customer interviews, usability tests, and win/loss debriefs.</li>
+        <li>Partnered with cross-functional teams to align product roadmaps with commercial activation plans.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-period">Jun 2017 — Feb 2020</div>
+        <div class="exp-company">Infostretch / Xpanxion</div>
+        <div class="exp-role">Enterprise Architect, AI Platforms and Solutions</div>
+        <span class="exp-tag">Healthcare · BFSI · Telecom</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Delivered 35% to 65% cost savings across 25+ enterprise projects using AI/ML, AR/VR, and chatbot technologies.</li>
+        <li>Generated 100+ product ideas and launched 4 mini-products through structured Design Thinking sessions.</li>
+        <li>Reduced implementation cycle times by 75% to 95% through frictionless feature design and cloud automation.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-period">Jun 2007 — Jun 2017</div>
+        <div class="exp-company">Infosys</div>
+        <div class="exp-role">Product Technical Architect</div>
+        <span class="exp-tag">Enterprise SaaS</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Earned a patent for the Accelerated Test Automation Framework, reducing manual efforts by 77%.</li>
+        <li>Secured a $5 billion PaaS engagement by integrating QA and DevOps solutions with GTM campaigns.</li>
+        <li>Led product architecture across multi-year enterprise programs in healthcare and financial services.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-period">Dec 2000 — Jun 2007</div>
+        <div class="exp-company">Tech Mahindra</div>
+        <div class="exp-role">Technical Lead, Dev/Build/Test/Support</div>
+        <span class="exp-tag">Enterprise</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Reduced cycle time and effort by 35% to 75% by automating build, test, and deployment pipelines.</li>
+        <li>Optimized database performance and developed end-to-end enterprise interfaces across key client programs.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-label">04 — Portfolio</div>
+  <h2 class="section-title">Impact <em>Projects</em></h2>
+  <p class="portfolio-intro">A selection of initiatives where market insight translated directly into measurable business outcomes.</p>
+
+  <div class="projects-grid">
+
+    <!-- FEATURED -->
+    <div class="project-card featured reveal">
+      <div>
+        <div class="project-tag">Featured Project</div>
+        <div class="project-title">Product Trial UX Overhaul</div>
+        <p class="project-desc">Identified 19-step trial onboarding as the primary drop-off cause through behavioral analytics and user interviews. Redesigned the entire first-run experience to a single-step activation flow, eliminating friction and aligning the product's first impression with buyer expectations.</p>
+        <div class="project-metrics">
+          <div class="project-metric">
+            <div class="project-metric-value">97%</div>
+            <div class="project-metric-label" style="color:rgba(245,240,232,0.4)">Initial drop-off rate</div>
+          </div>
+          <div class="project-metric">
+            <div class="project-metric-value">75%</div>
+            <div class="project-metric-label" style="color:rgba(245,240,232,0.4)">Post-redesign drop-off</div>
+          </div>
+          <div class="project-metric">
+            <div class="project-metric-value">19→1</div>
+            <div class="project-metric-label" style="color:rgba(245,240,232,0.4)">Onboarding steps reduced</div>
+          </div>
+        </div>
+      </div>
+      <div class="project-right">
+        <div class="outcome-item">
+          <div class="outcome-title">Research Method</div>
+          <div class="outcome-value">Behavioral analytics, session replay, user interviews, and funnel cohort analysis to identify drop-off root causes.</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-title">Design Approach</div>
+          <div class="outcome-value">Design Thinking sprint with cross-functional team. Prototype testing with 12 users before full rollout.</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-title">Business Impact</div>
+          <div class="outcome-value">Directly contributed to 25X ARR growth by improving trial-to-paid conversion at the top of the funnel.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-tag">Growth Engineering</div>
+      <div class="project-title">Product-Led Growth Engine</div>
+      <p class="project-desc">Built compounding acquisition loops combining organic SEO, content-driven demand generation, and CRO experiments. Grew inbound pipeline from 50 demo requests annually to over 400, enabling a shift away from outbound-dependent revenue.</p>
+      <div class="project-metrics">
+        <div class="project-metric">
+          <div class="project-metric-value">10X</div>
+          <div class="project-metric-label">Pipeline growth</div>
+        </div>
+        <div class="project-metric">
+          <div class="project-metric-value">400</div>
+          <div class="project-metric-label">Demo requests per year</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-tag">Competitive Intelligence</div>
+      <div class="project-title">AI-Powered Market Monitoring</div>
+      <p class="project-desc">Designed and deployed an AI-powered competitive intelligence system using LLMs and GPT agents to automate market monitoring, synthesize signals from analyst reports, customer interviews, and public filings, and deliver structured weekly briefings to leadership.</p>
+      <div class="project-metrics">
+        <div class="project-metric">
+          <div class="project-metric-value">60%</div>
+          <div class="project-metric-label">Reduction in research cycle time</div>
+        </div>
+        <div class="project-metric">
+          <div class="project-metric-value">Weekly</div>
+          <div class="project-metric-label">Automated intelligence reports</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-tag">Paid Acquisition</div>
+      <div class="project-title">LinkedIn Ads Performance Program</div>
+      <p class="project-desc">Developed a rigorous LinkedIn Ads experimentation program using persona-mapped creative copy, manual bidding strategies, and continuous multivariate testing. Achieved CTRs 10X above industry average through structured iteration and buyer insight.</p>
+      <div class="project-metrics">
+        <div class="project-metric">
+          <div class="project-metric-value">12%</div>
+          <div class="project-metric-label">Peak CTR achieved</div>
+        </div>
+        <div class="project-metric">
+          <div class="project-metric-value">24X</div>
+          <div class="project-metric-label">Above 0.5% industry avg</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-tag">Revenue Strategy</div>
+      <div class="project-title">25X ARR Growth Program</div>
+      <p class="project-desc">Owned full customer lifecycle strategy including journey mapping, pricing optimization, upsell nurture campaign design, and retention programs. Achieved 25X ARR growth from a combined organic and expansion motion with zero customer churn.</p>
+      <div class="project-metrics">
+        <div class="project-metric">
+          <div class="project-metric-value">25X</div>
+          <div class="project-metric-label">ARR growth delivered</div>
+        </div>
+        <div class="project-metric">
+          <div class="project-metric-value">100%</div>
+          <div class="project-metric-label">Customer retention</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <div class="section-label">05 — Contact</div>
+    <h2 class="section-title">Let's Build<br><em>Something</em></h2>
+    <p class="contact-sub">Open to senior product marketing, growth, and GTM leadership roles. Based in Pune, India. Available for remote, hybrid, and relocation opportunities.</p>
+  </div>
+
+  <div class="contact-links reveal">
+    <a href="mailto:tambey.anand@gmail.com" class="contact-link">
+      <div class="contact-link-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+        </svg>
+      </div>
+      <div class="contact-link-text">
+        <div class="contact-link-label">Email</div>
+        <div class="contact-link-value">tambey.anand@gmail.com</div>
+      </div>
+    </a>
+
+    <a href="tel:+919890899967" class="contact-link">
+      <div class="contact-link-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
+        </svg>
+      </div>
+      <div class="contact-link-text">
+        <div class="contact-link-label">Phone</div>
+        <div class="contact-link-value">+91 98908 99967</div>
+      </div>
+    </a>
+
+    <a href="https://www.linkedin.com/in/anandtambey" target="_blank" class="contact-link">
+      <div class="contact-link-icon">
+        <svg fill="currentColor" viewBox="0 0 24 24">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </div>
+      <div class="contact-link-text">
+        <div class="contact-link-label">LinkedIn</div>
+        <div class="contact-link-value">linkedin.com/in/anandtambey</div>
+      </div>
+    </a>
+
+    <a href="https://github.com/AnandTambey" target="_blank" class="contact-link">
+      <div class="contact-link-icon">
+        <svg fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </div>
+      <div class="contact-link-text">
+        <div class="contact-link-label">GitHub</div>
+        <div class="contact-link-value">github.com/AnandTambey</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Anand Tambey — Product Marketing and Growth Leader — Pune, India</p>
+  <p>Built with intention. Updated 2025.</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        // Stagger siblings
+        const siblings = [...entry.target.parentElement.querySelectorAll('.reveal')];
+        const idx = siblings.indexOf(entry.target);
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, idx * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav active state on scroll
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 200) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.opacity = a.getAttribute('href') === '#' + current ? '1' : '0.6';
+    });
+  }, { passive: true });
+
+  // Count-up animation for impact strip
+  function countUp(el, target, suffix = '') {
+    const isDecimal = target % 1 !== 0;
+    let start = 0;
+    const duration = 1800;
+    const step = 16;
+    const increment = target / (duration / step);
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= target) {
+        start = target;
+        clearInterval(timer);
+      }
+      el.textContent = isDecimal ? start.toFixed(1) + suffix : Math.floor(start) + suffix;
+    }, step);
+  }
+
+  const strip = document.querySelector('.impact-strip');
+  let counted = false;
+  const stripObserver = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !counted) {
+      counted = true;
+      const nums = strip.querySelectorAll('.impact-num');
+      const targets = [400, 12, 100, 75, 1];
+      const suffixes = ['', '%', '%', '%', ''];
+      nums.forEach((n, i) => countUp(n, targets[i], suffixes[i]));
+    }
+  }, { threshold: 0.5 });
+  stripObserver.observe(strip);
+</script>
 </body>
 </html>
